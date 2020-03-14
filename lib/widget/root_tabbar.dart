@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutternews/config/const.dart';
 
@@ -49,9 +50,41 @@ class RootTabBarState extends State<RootTabBar> {
         });
       },
       unselectedFontSize: 18.0,
+      selectedFontSize: 18.0,
+      elevation: 0,
     );
 
-    return null;
+    String title() {
+      switch (currentIndex) {
+        case 0:
+          return '首页';
+          break;
+        case 1:
+          return '辟谣';
+          break;
+        case 2:
+          return '防护';
+          break;
+        default:
+          return '知识';
+          break;
+      }
+    }
+
+    return new Scaffold(
+        bottomNavigationBar: new Theme(
+            data: new ThemeData(
+              canvasColor: Colors.grey[50],
+              highlightColor: Colors.transparent,
+              splashColor: Colors.transparent,
+            ),
+            child: new Container(
+              decoration: BoxDecoration(
+                  border:
+                      Border(top: BorderSide(color: lineColor, width: 0.2))),
+              child: bottomNavigationBar,
+            )),
+    );
   }
 }
 
