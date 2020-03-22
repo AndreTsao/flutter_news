@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutternews/config/const.dart';
+import 'package:flutter/cupertino.dart';
 
 class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -25,12 +26,72 @@ class ComMomBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get PreferredSize => new Size(100, 50);
+  Size get preferredSize => new Size(100, 50);
 
   @override
   Widget build(BuildContext context) {
     return showShadow
-        ? new Container(decoration: BoxDecoration(), child: new AppBar())
-        : new AppBar();
+        ? new Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    bottom: new BorderSide(
+                        color: Colors.grey, width: showShadow ? 0.5 : 0.0))),
+            child: new AppBar(
+              title: titleW == null
+                  ? new Text(
+                      title,
+                      style: new TextStyle(
+                          color: mainColor,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.w500),
+                    )
+                  : titleW,
+              backgroundColor: mainColor,
+              elevation: 0.0,
+              brightness: Brightness.dark,
+              leading: leadingW ?? leading(context),
+              centerTitle: true,
+              actions: rightDMActions ?? [new Center()],
+              bottom: bottom != null ? bottom : null,
+            ))
+        : new AppBar(
+            title: titleW == null
+                ? new Text(title,
+                    style: new TextStyle(
+                        color: mainColor,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.w500))
+                : titleW,
+            backgroundColor: backgroundColor,
+            elevation: 0.0,
+            brightness: Brightness.dark,
+            leading: leadingW ?? leading(context),
+            centerTitle: false,
+            bottom: bottom != null ? bottom : null,
+            actions: rightDMActions ?? [new Center()],
+          );
+  }
+
+  Widget leading(BuildContext context) {
+    final bool isShow = Navigator.canPop(context);
+    if (isShow) {
+      return new InkWell(
+        child: new Container(
+          width: 15,
+          height: 28,
+          child: leadingImg != ''
+              ? new Image.asset(leadingImg)
+              : new Icon(CupertinoIcons.back, color: mainColor),
+        ),
+        onTap: () {
+          if (Navigator.canPop(context)) {
+            FocusScope.of(context).requestFocus(new FocusNode());
+            Navigator.pop(context);
+          }
+        },
+      );
+    }
+
+    return null;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutternews/config/Config.dart';
-import 'package:flutternews/pages/root/RootPage.dart';
+import 'package:flutternews/config/config.dart';
+import 'package:flutternews/pages/root/root_page.dart';
 import 'package:nav_router/nav_router.dart';
 
 class MyApp extends StatelessWidget {
