@@ -3,7 +3,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url "https://storage.googleapis.com/download.flutter.io" }
     }
 
     dependencies {
@@ -16,7 +15,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://storage.googleapis.com/download.flutter.io" }
+        maven { url 'http://download.flutter.io' }
     }
 }
 
