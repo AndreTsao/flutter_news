@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutternews/config/const.dart';
+import 'package:flutternews/widget/scroll/my_behavior.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'bar/common_bar.dart';
 
 class RootTabBar extends StatefulWidget {
   final List pages;
@@ -46,8 +52,8 @@ class RootTabBarState extends State<RootTabBar> {
       onTap: (int index) {
         setState(() {
           currentIndex = index;
-          pageController.jumpToPage(currentIndex);
         });
+        pageController.jumpToPage(currentIndex);
       },
       unselectedFontSize: 18.0,
       selectedFontSize: 18.0,
@@ -72,18 +78,59 @@ class RootTabBarState extends State<RootTabBar> {
     }
 
     return new Scaffold(
-        bottomNavigationBar: new Theme(
-            data: new ThemeData(
-              canvasColor: Colors.grey[50],
-              highlightColor: Colors.transparent,
-              splashColor: Colors.transparent,
+      bottomNavigationBar: new Theme(
+          data: new ThemeData(
+            canvasColor: Colors.grey[50],
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+          ),
+          child: new Container(
+            decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: lineColor, width: 0.2))),
+            child: bottomNavigationBar,
+          )),
+      appBar: ComMomBar(
+        titleW: new AnimatedSwitcher(
+          duration: Duration(milliseconds: 400),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            var tween = Tween<double>(begin: 0, end: 1);
+            return FadeTransition(
+              child: child,
+              opacity: tween.animate(animation),
+            );
+          },
+          child: new Text(
+            title() ?? '',
+            key: ValueKey(title() ?? ''),
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          ),
+        ),
+        rightDMActions: <Widget>[
+          new MaterialButton(
+            onPressed: () => launch('https://github.com/ahyangnb/ncov_2019'),
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: new Text(
+              '开源地址',
+              style: TextStyle(color: Colors.white),
             ),
-            child: new Container(
-              decoration: BoxDecoration(
-                  border:
-                      Border(top: BorderSide(color: lineColor, width: 0.2))),
-              child: bottomNavigationBar,
-            )),
+          )
+        ],
+      ),
+      body: new ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: new PageView.builder(
+          itemBuilder: (BuildContext context, int index) =>
+              widget.pages[index].page,
+          controller: pageController,
+          itemCount: pages.length,
+          physics: Platform.isAndroid
+              ? new ClampingScrollPhysics()
+              : new NeverScrollableScrollPhysics(),
+          onPageChanged: (int index) {
+            setState(() => currentIndex = index);
+          },
+        ),
+      ),
     );
   }
 }

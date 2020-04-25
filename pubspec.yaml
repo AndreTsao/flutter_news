@@ -27,6 +27,7 @@ dependencies:
   nav_router: 0.0.2
   dio: 2.2.2
   package_info: 0.4.0+6
+  url_launcher: 5.2.7
 
 
 dev_dependencies:
