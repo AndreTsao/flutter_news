@@ -13,4 +13,12 @@ class _HomePageState extends State<HomePage>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => null;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Scaffold(
+      body: new Center(child: new Text("no data")),
+    );
+  }
 }

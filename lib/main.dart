@@ -15,10 +15,10 @@ void main() async {
   runApp(MyApp());
 
   //自定义报错页面
-  ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails) {
-    debugPrint(flutterErrorDetails.toString());
-    return Center(child: new Text("App Error.Email to Me,Please."));
-  };
+//  ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails) {
+//    debugPrint(flutterErrorDetails.toString());
+//    return Center(child: new Text("App Error.Email to Me,Please."));
+//  };
 
   /// Android状态栏透明
   if (Platform.isAndroid) {
