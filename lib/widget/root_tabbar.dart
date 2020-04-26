@@ -50,9 +50,7 @@ class RootTabBarState extends State<RootTabBar> {
       unselectedItemColor: mainTextColor,
       fixedColor: fixedColor,
       onTap: (int index) {
-        setState(() {
-          currentIndex = index;
-        });
+        setState(() => currentIndex = index);
         pageController.jumpToPage(currentIndex);
       },
       unselectedFontSize: 18.0,
@@ -120,7 +118,7 @@ class RootTabBarState extends State<RootTabBar> {
         behavior: MyBehavior(),
         child: new PageView.builder(
           itemBuilder: (BuildContext context, int index) =>
-              widget.pages[index].page,
+          widget.pages[index].page,
           controller: pageController,
           itemCount: pages.length,
           physics: Platform.isAndroid

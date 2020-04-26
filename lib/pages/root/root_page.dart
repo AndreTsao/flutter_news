@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutternews/config/const.dart';
 import 'package:flutternews/pages/home/home_page.dart';
+import 'package:flutternews/pages/lore/lore_page.dart';
+import 'package:flutternews/pages/protect/protect_page.dart';
+import 'package:flutternews/pages/rumor/rumor_page.dart';
 import 'package:flutternews/widget/root_tabbar.dart';
 import 'package:package_info/package_info.dart';
 
@@ -34,19 +37,19 @@ class _RootPageState extends State<RootPage> {
         title: '辟谣',
         icon: new LoadImage("assets/images/bottom_home.png", false),
         selectIcon: new LoadImage("assets/images/bottom_rumor.png", true),
-        page: new HomePage(),
+        page: new RumorPage(),
       ),
       new TabBarModel(
         title: '防护合辑',
         icon: new LoadImage("assets/images/bottom_protect.png", false),
         selectIcon: new LoadImage("assets/images/bottom_protect.png", true),
-        page: new HomePage(),
+        page: new ProtectPage(),
       ),
       new TabBarModel(
         title: '疾病知识',
         icon: new LoadImage("assets/images/bottom_lore.png", false),
         selectIcon: new LoadImage("assets/images/bottom_lore.png", true),
-        page: new HomePage(),
+        page: new LorePage(),
       ),
     ];
     return new RootTabBar(pages: pages, currentIndex: 0);
