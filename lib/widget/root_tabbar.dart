@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutternews/config/const.dart';
 import 'package:flutternews/widget/scroll/my_behavior.dart';
@@ -9,18 +8,19 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'bar/common_bar.dart';
 
+
 class RootTabBar extends StatefulWidget {
+  RootTabBar({this.pages, this.currentIndex = 0});
+
   final List pages;
   final int currentIndex;
-
-  RootTabBar({this.pages, this.currentIndex = 0});
 
   @override
   State<StatefulWidget> createState() => new RootTabBarState();
 }
 
 class RootTabBarState extends State<RootTabBar> {
-  var pages = new List<BottomNavigationBarItem>(); //viewpager
+  var pages = new List<BottomNavigationBarItem>();
   int currentIndex;
   var contents = new List<Offstage>();
   PageController pageController;
@@ -34,9 +34,10 @@ class RootTabBarState extends State<RootTabBar> {
       TabBarModel model = widget.pages[i];
       pages.add(
         new BottomNavigationBarItem(
-            icon: model.icon,
-            activeIcon: model.selectIcon,
-            title: new Text(model.title, style: new TextStyle(fontSize: 12.0))),
+          icon: model.icon,
+          activeIcon: model.selectIcon,
+          title: new Text(model.title, style: new TextStyle(fontSize: 12.0)),
+        ),
       );
     }
   }
@@ -59,35 +60,31 @@ class RootTabBarState extends State<RootTabBar> {
     );
 
     String title() {
-      switch (currentIndex) {
-        case 0:
-          return '首页';
-          break;
-        case 1:
-          return '辟谣';
-          break;
-        case 2:
-          return '防护';
-          break;
-        default:
-          return '知识';
-          break;
+      if (currentIndex == 0) {
+        return '首页';
+      } else if (currentIndex == 1) {
+        return '辟谣';
+      } else if (currentIndex == 2) {
+        return '防护';
+      } else {
+        return '知识';
       }
     }
 
     return new Scaffold(
       bottomNavigationBar: new Theme(
-          data: new ThemeData(
-            canvasColor: Colors.grey[50],
-            highlightColor: Colors.transparent,
-            splashColor: Colors.transparent,
-          ),
-          child: new Container(
-            decoration: BoxDecoration(
-                border: Border(top: BorderSide(color: lineColor, width: 0.2))),
-            child: bottomNavigationBar,
-          )),
-      appBar: ComMomBar(
+        data: new ThemeData(
+          canvasColor: Colors.grey[50],
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+        ),
+        child: new Container(
+          decoration: BoxDecoration(
+              border: Border(top: BorderSide(color: lineColor, width: 0.2))),
+          child: bottomNavigationBar,
+        ),
+      ),
+      appBar: new ComMomBar(
         titleW: new AnimatedSwitcher(
           duration: Duration(milliseconds: 400),
           transitionBuilder: (Widget child, Animation<double> animation) {
@@ -134,10 +131,10 @@ class RootTabBarState extends State<RootTabBar> {
 }
 
 class TabBarModel {
+  const TabBarModel({this.title, this.page, this.icon, this.selectIcon});
+
   final String title;
   final Widget icon;
   final Widget selectIcon;
   final Widget page;
-
-  const TabBarModel({this.title, this.page, this.icon, this.selectIcon});
 }
