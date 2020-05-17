@@ -21,7 +21,7 @@ class _RootPageState extends State<RootPage> {
   @override
   void initState() {
     super.initState();
-    checkVersion();
+    //checkVersion();
   }
 
   @override
@@ -35,7 +35,7 @@ class _RootPageState extends State<RootPage> {
       ),
       new TabBarModel(
         title: '辟谣',
-        icon: new LoadImage("assets/images/bottom_home.png", false),
+        icon: new LoadImage("assets/images/bottom_rumor.png", false),
         selectIcon: new LoadImage("assets/images/bottom_rumor.png", true),
         page: new RumorPage(),
       ),
@@ -55,13 +55,13 @@ class _RootPageState extends State<RootPage> {
     return new RootTabBar(pages: pages, currentIndex: 0);
   }
 
-  checkVersion() async {
+//  checkVersion() async {
 //    if (Platform.isIOS) {
 //      return;
 //    }
 //    final packageInfo = await PackageInfo.fromPlatform();
 //    VersionModel model=
-  }
+//  }
 }
 
 class LoadImage extends StatelessWidget {
