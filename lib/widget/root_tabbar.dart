@@ -15,7 +15,7 @@ class RootTabBar extends StatefulWidget {
   final int currentIndex;
 
   @override
-  State<StatefulWidget> createState() => new RootTabBarState();
+  RootTabBarState createState() => new RootTabBarState();
 }
 
 class RootTabBarState extends State<RootTabBar> {

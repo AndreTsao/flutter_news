@@ -3,6 +3,8 @@ import 'package:flutternews/config/config.dart';
 import 'package:flutternews/pages/root/root_page.dart';
 import 'package:nav_router/nav_router.dart';
 
+import 'config/const.dart';
+
 class MyApp extends StatelessWidget {
   // This widget is the pages.root of your application.
   @override

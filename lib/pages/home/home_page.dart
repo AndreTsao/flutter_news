@@ -10,15 +10,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
+  bool isReq = false;
+  List data = new List();
+
   @override
-  // TODO: implement wantKeepAlive
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+  @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
       body: new Center(child: new Text("no data")),
     );
+  }
+
+  getData() {
+
   }
 }
