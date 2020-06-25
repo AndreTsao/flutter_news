@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'bar/common_bar.dart';
 
-
 class RootTabBar extends StatefulWidget {
   RootTabBar({this.pages, this.currentIndex = 0});
 
@@ -115,7 +114,7 @@ class RootTabBarState extends State<RootTabBar> {
         behavior: MyBehavior(),
         child: new PageView.builder(
           itemBuilder: (BuildContext context, int index) =>
-          widget.pages[index].page,
+              widget.pages[index].page,
           controller: pageController,
           itemCount: pages.length,
           physics: Platform.isAndroid

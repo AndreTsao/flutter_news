@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
+  _HomePageState createState() {
     // TODO: implement createState
     return _HomePageState();
   }
@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => null;
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {

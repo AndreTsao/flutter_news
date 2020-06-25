@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class LorePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return null;
+  _LorePageState createState() {
+    return _LorePageState();
   }
 }
 
