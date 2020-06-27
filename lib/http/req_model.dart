@@ -17,6 +17,21 @@ class ReqModel {
   // 请求参数
   Map params() => {};
 
+  /***
+   * get请求
+   */
+  Future<dynamic> get() async {
+    return this._request(url: url(), method: RequestType.GET, params: params());
+  }
+
+  /**
+   * post请求
+   */
+  Future post() async {
+    return this
+        ._request(url: url(), method: RequestType.POST, params: params());
+  }
+
   Future _request({
     String url,
     RequestType method,
@@ -46,11 +61,8 @@ class ReqModel {
         }
       } else {
         if (mapNoEmpty(params) && formData.isNotEmpty) {
-          response = await _client.post(
-              url,
-              data: formData ?? params,
-              onSendProgress: progressCallBack
-          );
+          response = await _client.post(url,
+              data: formData ?? params, onSendProgress: progressCallBack);
         } else {
           response = await _client.post(url);
         }
@@ -68,7 +80,6 @@ class ReqModel {
       }
     } catch (e) {}
   }
-
 
   static Future _handError(int statusCode) {
     String errorMsg = 'Network request error';
