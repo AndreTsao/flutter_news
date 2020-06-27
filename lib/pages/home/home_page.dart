@@ -1,4 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutternews/api/news_model.dart';
+import 'package:flutternews/api/news_view_model.dart';
+import 'package:flutternews/commom/check.dart';
+import 'package:flutternews/widget/view/loading_view.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 /**
  * @Description:
  * @Author: AndrewChao
@@ -15,6 +23,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
+  RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
   bool isReq = false;
   List data = new List();
 
@@ -31,15 +41,48 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Center(child: new Text("no data")),
+      body: new SmartRefresher(
+        controller: _refreshController,
+        onRefresh: _refreshData,
+        child: isReq ?
+        listNoEmpty(data) ?
+        new ListView.builder(
+            itemBuilder: (context, index) {
+          TimeNewsModel model = data[index];
+          bool isNew = model.id == data[0].id;
+          return new NewsCar(
+
+          )},
+          itemCount: data.length,
+        ):new Center(
+          child:new Text(
+            '暂无数据',
+            style: Theme.of(context).textTheme.display1,
+          ) ,
+        )
+            : new LoadingView(),
+      ),
     );
   }
 
   //请求数据
   getData() {
-
+    timeNewsViewModel.getTimeNews().then((v) {
+      setState(() {
+        data = v;
+        isReq = true;
+      });
+    });
   }
 
+  Future<void> _refreshData() async {
+    final Completer<Null> completer = new Completer<Null>();
+    getData();
 
-
+    new Future.delayed(new Duration(seconds: 2), () {
+      completer.complete(null);
+      _refreshController.refreshCompleted();
+    });
+    return completer.future;
+  }
 }
