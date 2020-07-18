@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage>
             itemBuilder: (context, index) {
           TimeNewsModel model = data[index];
           bool isNew = model.id == data[0].id;
-          return new NewsCar(
+          return new NewsCard(
 
           )},
           itemCount: data.length,
