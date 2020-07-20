@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutternews/api/news_model.dart';
 import 'package:flutternews/commom/check.dart';
 import 'package:flutternews/commom/win_media.dart';
+import 'package:flutternews/widget/view/web_view_page.dart';
+import 'package:nav_router/nav_router.dart';
 
 /**
  * @Description:
@@ -30,7 +32,9 @@ class NewsCard extends StatelessWidget {
       alignment: Alignment.centerLeft,
       width: winWidth(context),
       child: new FlatButton(
-          onPressed: null,
+          onPressed: () => routePush(new WebViewPage(
+              model?.sourceUrl ?? 'http://book.flutterj.com/',
+              '${model?.title ?? '未知'}')),
           child: null),
     );
   }
