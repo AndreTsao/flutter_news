@@ -60,7 +60,8 @@ class ReqModel {
           response = await _client.get(url);
         }
       } else {
-        if (mapNoEmpty(params) && formData.isNotEmpty) {
+        //if (mapNoEmpty(params) && formData.isNotEmpty) {
+        if (mapNoEmpty(params)) {
           response = await _client.post(url,
               data: formData ?? params, onSendProgress: progressCallBack);
         } else {
