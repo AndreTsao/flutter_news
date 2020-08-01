@@ -13,6 +13,7 @@ TimeNewsViewModel timeNewsViewModel = new TimeNewsViewModel();
 class TimeNewsViewModel extends ViewModel {
   Future<dynamic> getTimeNews() async {
     final data = await TimeNewsReqModel().data();
+    print("ViewModel_data::$data");
     List list = new List();
 
     if (listNoEmpty(data)) {

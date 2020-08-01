@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutternews/api/news_model.dart';
@@ -74,6 +75,9 @@ class _HomePageState extends State<HomePage>
   //请求数据
   getData() {
     timeNewsViewModel.getTimeNews().then((v) {
+      String jsonStringA = json.encode(v);
+
+      print("HOME_PAGE_NININI::"+jsonStringA);
       setState(() {
         data = v;
         isReq = true;

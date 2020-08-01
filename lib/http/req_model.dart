@@ -73,6 +73,7 @@ class ReqModel {
         print('HTTP_REQUEST_URL::[$id]::$httpUrl');
         if (mapNoEmpty(params)) print('HTTP_REQUEST_BODY::[$id]::$params');
         print('HTTP_RESPONSE_BODY::[$id]::${json.encode(response.data)}');
+        return response.data;
       }
 
       ///处理错误部分
