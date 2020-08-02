@@ -55,7 +55,12 @@ class _HomePageState extends State<HomePage>
                       return new NewsCard(
                         model,
                         padding: EdgeInsets.only(
-                            left: 20.0, right: 20.0, top: isNew ? 10.0 : 10),
+                          left: 20.0,
+                          right: 20.0,
+                          top: isNew ? 10.0 : 10,
+                          bottom:
+                              model.id == data[data.length - 1].id ? 20.0 : 10,
+                        ),
                         isNew: isNew,
                       );
                     },
@@ -77,7 +82,7 @@ class _HomePageState extends State<HomePage>
     timeNewsViewModel.getTimeNews().then((v) {
       String jsonStringA = json.encode(v);
 
-      print("HOME_PAGE_NININI::"+jsonStringA);
+      print("HOME_PAGE_NININI::" + jsonStringA);
       setState(() {
         data = v;
         isReq = true;
