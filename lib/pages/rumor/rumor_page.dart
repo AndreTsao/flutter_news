@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class RumorPage extends StatefulWidget {
@@ -6,19 +9,49 @@ class RumorPage extends StatefulWidget {
 }
 
 class _RumorPageState extends State<RumorPage>
-    with AutomaticKeepAliveClientMixin{
+    with AutomaticKeepAliveClientMixin {
+  List<dynamic> data = new List();
+  bool isReq = false;
+  List entriesData = new List();
+
+  StatisticsModel statisticsModel = new StatisticsModel();
+
+  RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
+
+
   @override
   bool get wantKeepAlive => true;
-  
-  
-  
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return new Scaffold(
       body: new Center(
-        child: new Text("RumorPage"),
+        child: new Text('${data}'),
       ),
     );
   }
+
+//涛涛的接口
+//  getData() async {
+//    Dio dio = new Dio();
+//    Response response = await dio.get("http://119.45.34.76:8080/greet/hello");
+//    print("cyc----response:$response");
+//    setState(() {
+//      data = response.toString();
+//    });
+//  }
+
+  getData(){
+
+  }
+
+
 }
