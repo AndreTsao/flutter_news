@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ffi';
 
 import 'package:dio/dio.dart';
@@ -6,6 +7,9 @@ import 'package:flutternews/api/entries_view_model.dart';
 import 'package:flutternews/api/rumor_view_model.dart';
 import 'package:flutternews/api/statistics_model.dart';
 import 'package:flutternews/api/statistics_view_model.dart';
+import 'package:flutternews/commom/date.dart';
+import 'package:flutternews/commom/ui.dart';
+import 'package:flutternews/widget/view/title_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RumorPage extends StatefulWidget {
@@ -22,7 +26,7 @@ class _RumorPageState extends State<RumorPage>
   StatisticsModel statisticsModel = new StatisticsModel();
 
   RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
 
   @override
   bool get wantKeepAlive => true;
@@ -37,8 +41,16 @@ class _RumorPageState extends State<RumorPage>
   Widget build(BuildContext context) {
     super.build(context);
     return new Scaffold(
-      body: new Center(
-        child: new Text('${data}'),
+      body: new SmartRefresher(
+        controller: _refreshController,
+        onRefresh: _refreshData,
+        child: new ListView(
+          children: <Widget>[
+            new Space(),
+            new TitleView('全国统计',
+                subTitle: '${timeHandle(statisticsModel?.modifyTime ?? 0)}')
+          ],
+        ),
       ),
     );
   }
@@ -73,7 +85,16 @@ class _RumorPageState extends State<RumorPage>
         entriesData = value;
       });
     });
+  }
 
-
+  //下拉刷新  TODO 没有领悟到
+  Future<void> _refreshData() async {
+    final Completer<Null> completer = new Completer<Null>();
+    getData();
+    new Future.delayed(new Duration(seconds: 2), () {
+      completer.complete(null);
+      _refreshController.refreshCompleted();
+    });
+    return completer.future;
   }
 }
