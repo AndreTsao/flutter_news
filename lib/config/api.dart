@@ -11,5 +11,8 @@ class API {
    // 最新辟谣
   static const getIndexRumorList = '/data/getIndexRumorList';
 
+  // 诊疗信息
+  static const getEntries = '/data/getEntries';
+
 
 }

@@ -2,6 +2,11 @@ import 'dart:ffi';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutternews/api/entries_view_model.dart';
+import 'package:flutternews/api/rumor_view_model.dart';
+import 'package:flutternews/api/statistics_model.dart';
+import 'package:flutternews/api/statistics_view_model.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RumorPage extends StatefulWidget {
   @override
@@ -18,7 +23,6 @@ class _RumorPageState extends State<RumorPage>
 
   RefreshController _refreshController =
   RefreshController(initialRefresh: false);
-
 
   @override
   bool get wantKeepAlive => true;
@@ -49,9 +53,27 @@ class _RumorPageState extends State<RumorPage>
 //    });
 //  }
 
-  getData(){
+  getData() {
+    rumorListReqViewModel.getRumor().then((v) {
+      //谣言列表
+      setState(() {
+        data = v;
+        isReq = true;
+      });
+    });
+    //统计数据
+    statisticsViewModel.getData().then((v) {
+      setState(() {
+        statisticsModel = v;
+      });
+    });
+    //诊疗信息
+    entriesViewModel.getData().then((value) {
+      setState(() {
+        entriesData = value;
+      });
+    });
+
 
   }
-
-
 }
