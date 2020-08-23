@@ -20,17 +20,16 @@ class TitleView extends StatelessWidget {
     return new Row(
       children: <Widget>[
         new Container(
-          margin: EdgeInsets.only(left: 10),
+          margin: EdgeInsets.only(left: 10.0),
           decoration: BoxDecoration(
-            color: appBarColor,
-            borderRadius: BorderRadius.all(Radius.circular(2.0)),
-          ),
+              color: appBarColor,
+              borderRadius: BorderRadius.all(Radius.circular(2.0))),
           width: 5.0,
           height: 15.0,
         ),
-        new Space(width: 10.0),
+        new Space(width: 10),
         new Text(
-          "$title",
+          '$title',
           style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600),
         ),
         new Spacer(),
