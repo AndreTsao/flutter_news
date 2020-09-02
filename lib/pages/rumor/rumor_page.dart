@@ -48,7 +48,9 @@ class _RumorPageState extends State<RumorPage>
           children: <Widget>[
             new Space(),
             new TitleView('全国统计',
-                subTitle: '${timeHandle(statisticsModel?.modifyTime ?? 0)}')
+                subTitle: '${timeHandle(statisticsModel?.modifyTime ?? 0)}'),
+
+
           ],
         ),
       ),
