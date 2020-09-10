@@ -11,7 +11,7 @@ import 'package:flutternews/api/statistics_model.dart';
 class Statics extends StatelessWidget {
   final StatisticsModel statisticsModel;
 
-  Statics(this.statisticsModel)
+  Statics(this.statisticsModel);
 
   Color strColor(name) {
     switch (name) {
@@ -32,11 +32,40 @@ class Statics extends StatelessWidget {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+  static TextStyle defStyle =
+      TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600);
+
+  Color iconColor(String label) {
+    switch (label) {
+      case '传染源':
+        return Colors.blueAccent;
+        break;
+      case '病毒':
+        return Colors.blueAccent;
+        break;
+      case '传播途径':
+        return Colors.blueAccent;
+        break;
+      default:
+        return Colors.red;
+        break;
+    }
   }
 
+  @override
+  Widget build(BuildContext context) {
+    if (statisticsModel == null) {
+      return LinearProgressIndicator();
+    }
+  }
+}
 
+class PersonInfoModel {
+  String label;
+  String value;
+
+  PersonInfoModel(Map value) {
+    this.label = value['label'];
+    this.value = value['value'];
+  }
 }
