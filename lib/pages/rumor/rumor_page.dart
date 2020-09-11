@@ -9,6 +9,7 @@ import 'package:flutternews/api/statistics_model.dart';
 import 'package:flutternews/api/statistics_view_model.dart';
 import 'package:flutternews/commom/date.dart';
 import 'package:flutternews/commom/ui.dart';
+import 'package:flutternews/pages/item/Statics.dart';
 import 'package:flutternews/widget/view/title_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -49,7 +50,7 @@ class _RumorPageState extends State<RumorPage>
             new Space(),
             new TitleView('全国统计',
                 subTitle: '${timeHandle(statisticsModel?.modifyTime ?? 0)}'),
-
+            new Statics(statisticsModel ?? null),
 
           ],
         ),
