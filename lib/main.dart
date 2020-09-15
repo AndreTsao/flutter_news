@@ -9,8 +9,8 @@ import 'package:flutternews/config/storage_manager.dart';
 void main() async {
   //？？？
   WidgetsFlutterBinding.ensureInitialized();
-  //初始化配置
-  await StorageManager.init();
+  //初始化配置  TODO有报错，还没解决https://github.com/simplezhli/flutter_deer/issues/115
+  //await StorageManager.init();
 
   runApp(MyApp());
 

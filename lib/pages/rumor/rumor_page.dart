@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'dart:ffi';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutternews/api/entries_view_model.dart';
 import 'package:flutternews/api/rumor_view_model.dart';
 import 'package:flutternews/api/statistics_model.dart';
 import 'package:flutternews/api/statistics_view_model.dart';
+import 'package:flutternews/commom/check.dart';
 import 'package:flutternews/commom/date.dart';
 import 'package:flutternews/commom/ui.dart';
+import 'package:flutternews/config/const.dart';
 import 'package:flutternews/pages/item/Statics.dart';
 import 'package:flutternews/widget/view/title_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -51,7 +54,19 @@ class _RumorPageState extends State<RumorPage>
             new TitleView('全国统计',
                 subTitle: '${timeHandle(statisticsModel?.modifyTime ?? 0)}'),
             new Statics(statisticsModel ?? null),
-
+            new Divider(),
+            new Space(height: mainSpace / 2),
+            new Visibility(
+                visible: strNoEmpty(statisticsModel?.imgUrl ?? ''),
+                child: new TitleView("疫情地图", subTitle: '数据来源：国家及各省市地区卫健委')),
+            new Visibility(
+                visible: listNoEmpty(statisticsModel?.dailyPics),
+                child: new Column(
+                    children: listNoEmpty(statisticsModel?.dailyPics)
+                        ? statisticsModel.dailyPics.map((pics) {
+                            return new CachedNetworkImage(imageUrl: pics);
+                          }).toList()
+                        : []))
           ],
         ),
       ),
