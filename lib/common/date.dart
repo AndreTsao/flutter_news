@@ -1,4 +1,4 @@
-import 'package:flutternews/commom/check.dart';
+import 'package:flutternews/common/check.dart';
 import 'package:intl/intl.dart';
 
 /**
