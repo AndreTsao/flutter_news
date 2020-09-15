@@ -151,6 +151,26 @@ class Statics extends StatelessWidget {
         ),
       );
     }
+
+    return new Column(
+      children: <Widget>[
+        new Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          margin: EdgeInsets.only(top: 10.0),
+          child: new Row(
+            children: personInfo.map(itemBuild).toList(),
+          ),
+        ),
+        new Divider(),
+        new Container(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          margin: EdgeInsets.symmetric(vertical: 10.0),
+          child: new Column(
+            children: staticsInfo.map(_staticsBuild).toList(),
+          ),
+        )
+      ],
+    );
   }
 }
 
